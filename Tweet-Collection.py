@@ -1,19 +1,20 @@
-import tweepy
 import sys
+
 import jsonpickle
+import tweepy
 
 auth = tweepy.AppAuthHandler('', '')
 
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
-if (not api):
+if not api:
     print ("Can't Authenticate")
     sys.exit(-1)
 
 searchQuery = '#Trump'
 maxTweets = 10000000
 tweetsPerQry = 100
-fName = 'tweets.txt'
+fName = 'tweets-2000mi-HashTrump.txt'
 sinceId = None
 max_id = -1L
 
@@ -24,17 +25,17 @@ with open(fName, 'w') as f:
         try:
             if max_id <= 0:
                 if not sinceId:
-                    new_tweets = api.search(q=searchQuery, lang='en', geocode='39.8282,98.5795,2000mi',
+                    new_tweets = api.search(q=searchQuery, lang='en', geocode='39.198205,-97.646484,2000mi',
                                             count=tweetsPerQry, since='2016-11-08')
                 else:
-                    new_tweets = api.search(q=searchQuery, count=tweetsPerQry,
+                    new_tweets = api.search(q=searchQuery, count=tweetsPerQry, geocode='39.198205,-97.646484,2000mi',
                                             since_id=sinceId, since='2016-11-08')
             else:
                 if not sinceId:
-                    new_tweets = api.search(q=searchQuery, count=tweetsPerQry,
+                    new_tweets = api.search(q=searchQuery, count=tweetsPerQry, geocode='39.198205,-97.646484,2000mi',
                                             max_id=str(max_id - 1), since='2016-11-08')
                 else:
-                    new_tweets = api.search(q=searchQuery, count=tweetsPerQry,
+                    new_tweets = api.search(q=searchQuery, count=tweetsPerQry, geocode='39.198205,-97.646484,2000mi',
                                             max_id=str(max_id - 1),
                                             since_id=sinceId, since='2016-11-08')
             if not new_tweets:
