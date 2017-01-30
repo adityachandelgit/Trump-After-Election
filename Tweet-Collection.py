@@ -14,7 +14,7 @@ if not api:
 searchQuery = '#Trump'
 maxTweets = 10000000
 tweetsPerQry = 100
-fName = 'tweets-2000mi-HashTrump.txt'
+fName = 'Tweets-2000mi-HashTrump.txt'
 sinceId = None
 max_id = -1L
 
